@@ -78,10 +78,15 @@ WSGI_APPLICATION = 'instaproject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': 'instagram',
+        'USER': 'markchege',
+        'PASSWORD':'konshens',
     }
 }
-
+   'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tribune',
+        'USER': '<Your Database Username >',
+    'PASSWORD':'<Your Database Password>',
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
