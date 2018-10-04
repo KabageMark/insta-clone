@@ -5,6 +5,19 @@ class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='profile-pics')
     bio = models.TextField()
 
+    @classmethod
+    def update_caption(cls,current_value,new_value):
+        fetched_object = Image.objects.filter(name=current_value).update(name=new_value)
+        return fetched_object
+
+    @classmethod
+    def save_image(self):
+        return self.save()
+
+    @classmethod   
+    def delete_image(self):
+        return self.delete()
+
 
 class Image(models.Model):
     image = models.ImageField(upload_to='images-uploaded')
@@ -19,9 +32,10 @@ class Image(models.Model):
         fetched_object = Image.objects.filter(name=current_value).update(name=new_value)
         return fetched_object
 
-
+    @classmethod
     def save_image(self):
         return self.save()
-        
+
+    @classmethod    
     def delete_image(self):
         return self.delete()
