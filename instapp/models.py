@@ -4,7 +4,12 @@ from django.db import models
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='profile-pics')
     bio = models.TextField()
+    username = models.CharField(max_length =30)
 
+    @classmethod
+    def search_by_username(cls,search_term):
+        user = Users.objects.filter(user__name__icontains=search_term)
+        return user
     @classmethod
     def update_caption(cls,current_value,new_value):
         fetched_object = Image.objects.filter(name=current_value).update(name=new_value)
