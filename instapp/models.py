@@ -28,7 +28,7 @@ class Image(models.Model):
     image = models.ImageField(upload_to='images-uploaded')
     image_name = models.CharField(max_length =30)
     image_caption = models.CharField(max_length =30)
-    image_profile = ForeignKey(Profile)
+    image_profile = models.ForeignKey(Profile)
     image_likes = models.PositiveIntegerField()
     image_comments = models.TextField()
     
