@@ -1,11 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='profile-pics')
     bio = models.TextField()
-    username = models.CharField(max_length =30)
-
+    user= models.ForeignKey(User)
+     
     @classmethod
     def search_by_username(cls,search_term):
         user = Users.objects.filter(user__name__icontains=search_term)
@@ -28,9 +29,9 @@ class Image(models.Model):
     image = models.ImageField(upload_to='images-uploaded')
     image_name = models.CharField(max_length =30)
     image_caption = models.CharField(max_length =30)
-    image_profile = models.ForeignKey(Profile)
     image_likes = models.PositiveIntegerField()
     image_comments = models.TextField()
+    user= models.ForeignKey(User)
     
     @classmethod
     def update_caption(cls,current_value,new_value):
