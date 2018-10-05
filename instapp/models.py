@@ -31,7 +31,7 @@ class Image(models.Model):
     image_caption = models.CharField(max_length =30)
     image_likes = models.PositiveIntegerField()
     image_comments = models.TextField()
-    user= models.ForeignKey(User)
+    users = models.ForeignKey(User,on_delete=models.CASCADE)
     
     @classmethod
     def update_caption(cls,current_value,new_value):
