@@ -2,8 +2,9 @@ from django.shortcuts import render,redirect
 from .forms import NewPostForm
 
 # Create your views here.
-def welcome(request):
-    return render(request,'index.html',)
+def Posts(request):
+    Posts = Image.get_all()
+    return render(request, 'index.html',{"Posts":Posts})
 
 
 #.....

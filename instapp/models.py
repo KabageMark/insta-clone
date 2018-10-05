@@ -34,6 +34,17 @@ class Image(models.Model):
     users = models.ForeignKey(User,on_delete=models.CASCADE)
     
     @classmethod
+    def get_all(cls):
+        all_objects = Image.objects.all()
+        for item in all_objects:
+            return item;
+
+    @classmethod
+    def get_image_by_id(cls,incoming_id):
+        image_result = cls.objects.get(id=incoming_id)
+        return image_result
+
+    @classmethod
     def update_caption(cls,current_value,new_value):
         fetched_object = Image.objects.filter(name=current_value).update(name=new_value)
         return fetched_object
