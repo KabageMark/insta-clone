@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .forms import NewPostForm
-
+from .models import Image
 # Create your views here.
 def Posts(request):
-    Posts = Image.get_all()
-    return render(request, 'index.html',{"Posts":Posts})
+    posts = Image.get_all()
+    return render(request, 'index.html',{"posts":posts,})
 
 
 #.....
@@ -15,7 +16,7 @@ def NewPost(request):
     if request.method == 'POST':
         form = NewPostForm(request.POST, request.FILES)
         if form.is_valid():
-            new_post = form.save(commit=False)
+            new_post = form.save()
             new_post.user = current_user
             new_post.save()
         return redirect('index')

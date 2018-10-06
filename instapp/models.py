@@ -31,13 +31,12 @@ class Image(models.Model):
     image_caption = models.CharField(max_length =30)
     image_likes = models.PositiveIntegerField()
     image_comments = models.TextField()
-    users = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE ,null=True)
     
     @classmethod
     def get_all(cls):
         all_objects = Image.objects.all()
-        for item in all_objects:
-            return item;
+        return all_objects
 
     @classmethod
     def get_image_by_id(cls,incoming_id):
