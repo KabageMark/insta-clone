@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import NewPostForm
+from .forms import NewPostForm,NewProfileForm
 from .models import Image
 # Create your views here.
 def Posts(request):
@@ -23,4 +23,20 @@ def NewPost(request):
 
     else:
         form = NewPostForm()
+    return render(request, 'post.html', {"form": form})
+
+
+@login_required(login_url='/accounts/login/')
+def Update(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = NewProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            new_update = form.save()
+            new_update.user = current_user
+            new_update.save()
+        return redirect('index')
+
+    else:
+        form = NewProfileForm()
     return render(request, 'post.html', {"form": form})

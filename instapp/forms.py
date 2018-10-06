@@ -9,7 +9,7 @@ class NewPostForm(forms.ModelForm):
             'tags': forms.CheckboxSelectMultiple(),
         }
 
-class NewProflieForm(forms.ModelForm):
+class NewProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['users','comments','likes']
