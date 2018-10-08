@@ -1,22 +1,24 @@
 {%extends 'base.html'%}
+{% load staticfiles %}
 
  {% block content %}
 
  <div class="container">
 {% if posts %}
-    {% for post in posts %}
-   <div class="row">
-     <img src="{{post.image.url}}"  class="img-responsive" alt="">
-   </div>
-
-   <div class="row">
-     <h1 class="text-center">{{post.image_name}}</h1>
-   </div>
-   
-
-   <p>Posted  by  {{post.user.username}}</p>
-
-    {% endfor%}
+    {% for post in posts %}  
+    <div class="card text-center" style="width: 18rem;">
+            <div class="card-header">
+            {{post.image_name}}
+            </div>
+            <div class="card-body">
+            <img src="{{post.image.url}}"  class="img-responsive" alt="" style="width:100%;>
+            </div>
+            <div class="card-footer text-muted">
+            {{post.user.username}}
+            </div>
+          </div>
+          <br>
+{% endfor%}
     {% else %}
        be first!
     {% endif %}  

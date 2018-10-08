@@ -6,11 +6,16 @@ class Profile(models.Model):
     profile_photo = models.ImageField(upload_to='profile-pics')
     bio = models.TextField()
     user= models.ForeignKey(User)
+
+    @classmethod
+    def get_all(cls):
+        all_objects = Profile.objects.all()
+        return all_objects
      
     @classmethod
     def search_by_username(cls,search_term):
-        user = Users.objects.filter(user__name__icontains=search_term)
-        return user
+        profile = cls.objects.filter(user__name__icontains=search_term)
+        return profile
     @classmethod
     def update_caption(cls,current_value,new_value):
         fetched_object = Image.objects.filter(name=current_value).update(name=new_value)

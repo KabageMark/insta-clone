@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+
+ {% block content %}
+
+ <div class="container">
+{% if profile %}
+    {% for profile in profile %}
+   <div class="row">
+     <img src="{{profile.profile_photo.url}}"  class="img-responsive" alt="">
+   </div>
+
+   <div class="row">
+     <h1 class="text-center">{{profile.bio}}</h1>
+   </div>
+
+    {% endfor%}
+    {% else %}
+       be first!
+    {% endif %}  
+
+   <div class="row">
+     {% autoescape on %}
+     {{.post| safe}}
+    {% endautoescape %}
+
+   </div>
+
+   <div class="row">
+   </div>
+
+ </div>
+
+ {% endblock %}

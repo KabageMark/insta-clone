@@ -1,0 +1,32 @@
+#logo1{
+   width: 280px;
+   height: 80px;
+}
+#logo2{
+    color: black;
+ }
+
+#logo3{
+    width: 200px;
+    height: 200px;
+    transform: translate(280px,-0px);
+ }
+
+ #logo4{
+    width: 100px;
+    height: 100px;
+    transform: translate(260px,-0px);
+ }
+
+ #logos{
+    color: white;
+ }
+
+#searchform{
+    transform: translate(150px,-0px);
+}
+.material-icons.md-48 { 
+    font-size: 48px;
+    transform: translate(550px,10px); 
+
+}
