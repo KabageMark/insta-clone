@@ -2,18 +2,28 @@
 
  {% block content %}
 
- <div class="container">
+ <div class="container-fluid">
 {% if profile %}
     {% for profile in profile %}
    <div class="row">
-     <img src="{{profile.profile_photo.url}}"  class="img-responsive" alt="">
-   </div>
-
-   <div class="row">
-     <h1 class="text-center">{{profile.bio}}</h1>
-   </div>
-
+     <div class="col-md-3">
+     <img src="{{profile.profile_photo.url}}"  class="img-responsive" style="width:150px;height:150px;  border-radius:50%;">
+     </div>
+     <div class="col-md-2">
+       0 <strong>posts</strong>
+     </div>
+     <div class="col-md-2">
+       0 <strong>followers</strong>
+     </div>
+     <div class="col-md-2">
+       0 <strong>following</strong>
+     </div>
+  </div>
+    <br>
+    <br>
     {% endfor%}
+
+
     {% else %}
        be first!
     {% endif %}  

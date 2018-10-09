@@ -5,9 +5,18 @@ from .forms import NewPostForm,NewProfileForm
 from .models import Image,Profile
 
 # Create your views here.
-def Posts(request):
-    posts = Image.get_all()
-    return render(request, 'index.html',{"posts":posts,})
+
+def home(request):
+    title = 'Instagram'
+    current_user = request.user
+    profile = Profile.get_all()
+    image = Image.get_all()
+    # comments = Comment.get_comment()
+    return render(request,'index.html',{"title":title,
+                                        "profile":profile,
+                                        # "comments":comments,
+                                        "current_user":current_user,
+                                        "image":image,})
 
 def Profiles(request):
     profile = Profile.get_all()

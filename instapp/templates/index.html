@@ -3,22 +3,69 @@
 
  {% block content %}
 
- <div class="container">
-{% if posts %}
-    {% for post in posts %}  
-    <div class="card text-center" style="width: 18rem;">
+ <div class="container-fluid">
+{% if image %}
+    {% for img in image %} {% if img.image %}
+     
+    <!-- <div class="card text-center" style="width: 18rem;">
             <div class="card-header">
             {{post.image_name}}
             </div>
             <div class="card-body">
-            <img src="{{post.image.url}}"  class="img-responsive" alt="" style="width:100%;>
+            <img src="{{post.image.url}}"  class="img-responsive" alt="" style="width:100%";>
             </div>
             <div class="card-footer text-muted">
             {{post.user.username}}
             </div>
           </div>
-          <br>
-{% endfor%}
+          <br> -->
+
+          <!-- <div class="card border-default mb-3" style="width:100%;max-width:300px">
+              <div class="card-header bg-transparent">{{post.image_name}}</div>
+              <div class="card-body">
+              <img src="{{post.image.url}}"  class="img-responsive" alt="" style="width:100%;">
+              </div>
+              <div class="card-footer bg-transparent">{{post.user.username}}</div>
+            </div> -->
+            
+            <div class="card" style="width: 40rem";>
+                <div class="card-header">
+                <div class="profile-img">
+                    <img class="profile-img" src="{{img.profile.profile_photo.url}}"/>
+                    
+                </div>
+                {% endif %}
+                    
+                <div class="profile-info">
+                    <div class="name"></div>
+                    <div class="location"></div>
+                </div>
+                </div>
+                <div class="content">
+                    <img src="{{img.image.url}}"style="width: 40rem" class="content" />
+                </div>
+                <div class="card-footer">
+                    <div class="footer-content">
+                        <span class="likes">241 likes</span>
+                            <p><span></span> </p>
+        
+                           
+                            <p><span><img class="profile-img" src=""/></span><span>{{ comment.author}}</span> {{comment.comment}} </p>
+                            
+                            <form  action="" method="post" enctype="multipart/form-data">
+                               
+                                <div class="input-group">
+                                  <input type="text" class="form-control" placeholder="Comment" name="comment">
+                                    <div class="input-group-btn">
+                                    <input class="btn btn-success" type="submit" value="Post"><i class="glyphicon glyphicon-cog"></i></button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+
+{% endfor %}
     {% else %}
        be first!
     {% endif %}  
