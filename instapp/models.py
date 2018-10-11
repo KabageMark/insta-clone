@@ -73,3 +73,10 @@ class Likes(models.Model):
     user = models.OneToOneField(User,related_name='l_user')
     post=models.ForeignKey(Image,related_name='likes')
     like=models.CharField(max_length=3,default='1')
+
+
+class Likes(forms.ModelForm):
+    class Meta:
+        model=Likes
+        exclude=[]
+        fields=[]

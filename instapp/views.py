@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import NewPostForm,NewProfileForm,CommentForm
-from .models import Image,Profile,Comment
+from .models import Image,Profile,Comment,Likes
 
 # Create your views here.
 
@@ -84,4 +84,24 @@ def comment(request,id):
             comment.post=upload
             comment.save()
             return redirect('index')
+    return redirect('index')
+
+@login_required(login_url='/accounts/login')
+def likes(request,id):
+    likes=Image.objects.get(id=id)
+    if request.method == 'POST':
+
+        like = Likes(request.POST)
+        if like.is_valid():
+            liked=like.save(commit=False)
+            # already_liked = Likes.objects.all()
+            # for user in already_liked.user:
+            #     if user==request.user:
+            #        user.delete()
+            #     else:
+                    
+            liked.user = request.user
+            liked.post = likes
+            liked.save()
+            return redirect('index')   
     return redirect('index')
