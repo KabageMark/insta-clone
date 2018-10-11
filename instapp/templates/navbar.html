@@ -7,4 +7,17 @@
                   <input class="input-search" type="search" name="search" placeholder="search"/>
                 </form>
                 <section class="icons-section"><a class="fa fa-compass" href="#"></a><a class="fa fa-heart" href="#"></a><a class="fa fa-user" href="{% url 'profile' %}"></a></section>
+
+                <div class="dropdown show">
+                  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Accounts 
+                  </a>
+                
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/accounts/login">Login</a>
+                    <a class="dropdown-item" href="/accounts/login">logout</a>
+                    <a class="dropdown-item" href="/accounts/register">Register</a>
+                  </div>
+                </div>
+                
               </nav>

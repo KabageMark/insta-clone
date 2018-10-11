@@ -23,8 +23,8 @@ class CommentForm(forms.ModelForm):
         model = Comment
         exclude = ['user','comment_date','image','post']
 
-class Likes(forms.ModelForm):
+class LikesForm(forms.ModelForm):
     class Meta:
         model=Likes
-        exclude=[]
+        exclude=['user']
         fields=[]        

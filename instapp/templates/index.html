@@ -50,7 +50,9 @@
                             <b><em><a href='{{comment.user.username}}'>{{comment.user.username}}</a></em></b>:{{comment.comment}}
                             <br>
                         {% endfor %}
-            <form action="/like/{{img.id}}" method="post" enctype="multipart/form-data">
+
+
+            <form action="/likes/{{img.id}}" method="post" enctype="multipart/form-data">
                 {%csrf_token%}
 
                 {% bootstrap_form like %}
@@ -58,8 +60,15 @@
                         <i class="fa fa-heart" type='submit' style="font-size:30px;">{{img.likes.all|length}}</i>
 
                 </button>    
-            </form>    
-            <form id='comment' action="/comments/{{img.id}}" method="post" enctype="multipart/form-data">
+            </form>  
+
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                  Add comment
+                </a>
+            </p>
+            
+            <form id='comment' action="/comments/{{img.id}}" method="post" enctype="multipart/form-data" class="collapse" id="collapseExample">
                 {%csrf_token%}
 
                 {% bootstrap_form comm %}
@@ -85,7 +94,19 @@
 
    <div class="row">
    </div>
-
+   <p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+      Link with href
+    </a>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Button with data-target
+    </button>
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+    </div>
+  </div>
  </div>
 
  {% endblock %}

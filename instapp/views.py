@@ -1,9 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import NewPostForm,NewProfileForm,CommentForm
-from .models import Image,Profile,Comment,Likes
-
+from .forms import NewPostForm,NewProfileForm,CommentForm,LikesForm
+from .models import Image,Profile,Comment
 # Create your views here.
 
 def home(request):
@@ -12,16 +11,19 @@ def home(request):
     profile = Profile.get_all()
     image = Image.get_all()
     comm=CommentForm()
+    like = LikesForm()
     return render(request,'index.html',{"title":title,
                                         "profile":profile,
                                         "current_user":current_user,
                                         "image":image,
                                         "comm":comm,
+                                        "like":like,
                                         })
                 
 def Profiles(request):
     profile = Profile.get_all()
-    return render(request, 'profiles.html',{"profile":profile,})
+    image = Image.get_all()
+    return render(request, 'profiles.html',{"profile":profile,"image":image,})
 
 #.....
 @login_required(login_url='/accounts/login/')
@@ -87,19 +89,13 @@ def comment(request,id):
     return redirect('index')
 
 @login_required(login_url='/accounts/login')
-def likes(request,id):
+def Likes(request,id):
     likes=Image.objects.get(id=id)
     if request.method == 'POST':
 
-        like = Likes(request.POST)
+        like = LikesForm(request.POST)
         if like.is_valid():
-            liked=like.save(commit=False)
-            # already_liked = Likes.objects.all()
-            # for user in already_liked.user:
-            #     if user==request.user:
-            #        user.delete()
-            #     else:
-                    
+            liked=like.save(commit=False)                    
             liked.user = request.user
             liked.post = likes
             liked.save()
