@@ -1,8 +1,8 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import NewPostForm,NewProfileForm
-from .models import Image,Profile
+from .forms import NewPostForm,NewProfileForm,CommentForm
+from .models import Image,Profile,Comment
 
 # Create your views here.
 
@@ -11,13 +11,14 @@ def home(request):
     current_user = request.user
     profile = Profile.get_all()
     image = Image.get_all()
-    # comments = Comment.get_comment()
+    comm=CommentForm()
     return render(request,'index.html',{"title":title,
                                         "profile":profile,
-                                        # "comments":comments,
                                         "current_user":current_user,
-                                        "image":image,})
-
+                                        "image":image,
+                                        "comm":comm,
+                                        })
+                
 def Profiles(request):
     profile = Profile.get_all()
     return render(request, 'profiles.html',{"profile":profile,})
@@ -68,3 +69,19 @@ def search_results(request):
     else:
         message = "You haven't searched for any term"
         return render(request, 'searched.html',{"message":message}) 
+
+
+
+
+@login_required(login_url='/accounts/login')
+def comment(request,id):
+    upload = Image.objects.get(id=id)
+    if request.method == 'POST':
+        comm=CommentForm(request.POST)
+        if comm.is_valid():
+            comment=comm.save(commit=False)
+            comment.user = request.user
+            comment.post=upload
+            comment.save()
+            return redirect('index')
+    return redirect('index')

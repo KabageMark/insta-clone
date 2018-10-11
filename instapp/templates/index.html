@@ -1,12 +1,12 @@
 {%extends 'base.html'%}
 {% load staticfiles %}
-
+{% load bootstrap4 %}
  {% block content %}
 
  <div class="container-fluid">
 {% if image %}
     {% for img in image %} {% if img.image %}
-     
+          <p>{{img.id}}</p>
     <!-- <div class="card text-center" style="width: 18rem;">
             <div class="card-header">
             {{post.image_name}}
@@ -46,20 +46,26 @@
                 </div>
                 <div class="card-footer">
                     <div class="footer-content">
-                        <span class="likes">241 likes</span>
-                            <p><span></span> </p>
-        
-                           
-                            <p><span><img class="profile-img" src=""/></span><span>{{ comment.author}}</span> {{comment.comment}} </p>
-                            
-                            <form  action="" method="post" enctype="multipart/form-data">
-                               
-                                <div class="input-group">
-                                  <input type="text" class="form-control" placeholder="Comment" name="comment">
-                                    <div class="input-group-btn">
-                                    <input class="btn btn-success" type="submit" value="Post"><i class="glyphicon glyphicon-cog"></i></button>
-                                    </div>
-                                </form>
+                        {% for comment in  img.comments.all %}
+                            <b><em><a href='{{comment.user.username}}'>{{comment.user.username}}</a></em></b>:{{comment.comment}}
+                            <br>
+                        {% endfor %}
+            <form action="/like/{{img.id}}" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+
+                {% bootstrap_form like %}
+                <button type='submit'>
+                        <i class="fa fa-heart" type='submit' style="font-size:30px;">{{img.likes.all|length}}</i>
+
+                </button>    
+            </form>    
+            <form id='comment' action="/comments/{{img.id}}" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+
+                {% bootstrap_form comm %}
+                <input type="submit" class="btn btn-primary btn-lg" value="Add comment">
+            </form>
+       
                                 </div>
                             </div>
                          </div>

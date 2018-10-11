@@ -60,26 +60,16 @@ class Image(models.Model):
     @classmethod    
     def delete_image(self):
         return self.delete()
-
+ 
 class Comment(models.Model):
-    comments = models.CharField(max_length=200,blank=True,null=True)
-    comment_date = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User)
-    image = models.ForeignKey(Image,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,null=True)
+    post=models.ForeignKey(Image,related_name='comments',null=True)
+    comment=models.CharField(max_length=200,null=True)
 
     def __str__(self):
-        return self.comments
+        return self.comment
 
-    class Meta:
-        ordering = ['-comment_date']
-
-    def save_comment(self):
-        return self.save()
-
-    def delete_comment(self):
-        self.delete()
-
-    @classmethod
-    def get_comment(cls):
-        comment = Comment.objects.all()
-        return comment
+class Likes(models.Model):
+    user = models.OneToOneField(User,related_name='l_user')
+    post=models.ForeignKey(Image,related_name='likes')
+    like=models.CharField(max_length=3,default='1')
