@@ -75,8 +75,3 @@ class Likes(models.Model):
     like=models.CharField(max_length=3,default='1')
 
 
-class Likes(forms.ModelForm):
-    class Meta:
-        model=Likes
-        exclude=[]
-        fields=[]
