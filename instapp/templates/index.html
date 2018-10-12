@@ -1,112 +1,85 @@
 {%extends 'base.html'%}
 {% load staticfiles %}
 {% load bootstrap4 %}
- {% block content %}
+{% block content %}
 
- <div class="container-fluid">
-{% if image %}
-    {% for img in image %} {% if img.image %}
-          <p>{{img.id}}</p>
-    <!-- <div class="card text-center" style="width: 18rem;">
-            <div class="card-header">
-            {{post.image_name}}
-            </div>
-            <div class="card-body">
-            <img src="{{post.image.url}}"  class="img-responsive" alt="" style="width:100%";>
-            </div>
-            <div class="card-footer text-muted">
-            {{post.user.username}}
-            </div>
-          </div>
-          <br> -->
+<div class="container-fluid">
 
-          <!-- <div class="card border-default mb-3" style="width:100%;max-width:300px">
-              <div class="card-header bg-transparent">{{post.image_name}}</div>
-              <div class="card-body">
-              <img src="{{post.image.url}}"  class="img-responsive" alt="" style="width:100%;">
-              </div>
-              <div class="card-footer bg-transparent">{{post.user.username}}</div>
-            </div> -->
+
+<div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+                {% if image %}
+                {% for img in image %} {% if img.image %}
+               
+                <div class="card" style="width: 40rem" ;>
+                    <div class="card-header">
+                        <div class="profile-img">
+                            <img class="profile-img" src="{{img.profile.profile_photo.url}}" />
             
-            <div class="card" style="width: 40rem";>
-                <div class="card-header">
-                <div class="profile-img">
-                    <img class="profile-img" src="{{img.profile.profile_photo.url}}"/>
-                    
-                </div>
-                {% endif %}
-                    
-                <div class="profile-info">
-                    <div class="name"></div>
-                    <div class="location"></div>
-                </div>
-                </div>
-                <div class="content">
-                    <img src="{{img.image.url}}"style="width: 40rem" class="content" />
-                </div>
-                <div class="card-footer">
-                    <div class="footer-content">
-                        {% for comment in  img.comments.all %}
+                        </div>
+                        {% endif %}
+            
+                        <div class="profile-info">
+                            <div class="name"></div>
+                            <div class="location"></div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <img src="{{img.image.url}}" style="width: 40rem" class="content" />
+                    </div>
+                    <div class="card-footer">
+                        <div class="footer-content">
+                            {% for comment in img.comments.all %}
                             <b><em><a href='{{comment.user.username}}'>{{comment.user.username}}</a></em></b>:{{comment.comment}}
                             <br>
-                        {% endfor %}
-
-
-            <form action="/likes/{{img.id}}" method="post" enctype="multipart/form-data">
-                {%csrf_token%}
-
-                {% bootstrap_form like %}
-                <button type='submit'>
-                        <i class="fa fa-heart" type='submit' style="font-size:30px;">{{img.likes.all|length}}</i>
-
-                </button>    
-            </form>  
-
-            <p>
-                <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                  Add comment
-                </a>
-            </p>
+                            {% endfor %}
             
-            <form id='comment' action="/comments/{{img.id}}" method="post" enctype="multipart/form-data" class="collapse" id="collapseExample">
-                {%csrf_token%}
-
-                {% bootstrap_form comm %}
-                <input type="submit" class="btn btn-primary btn-lg" value="Add comment">
-            </form>
-       
-                                </div>
-                            </div>
-                         </div>
-                     </div>
-
-{% endfor %}
-    {% else %}
-       be first!
-    {% endif %}  
-
-   <div class="row">
-     {% autoescape on %}
-     {{.post| safe}}
-    {% endautoescape %}
-
-   </div>
-
-   <div class="row">
-   </div>
-   <p>
-    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-      Link with href
-    </a>
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      Button with data-target
-    </button>
-  </p>
-  <div class="collapse" id="collapseExample">
-    <div class="card card-body">
-      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+            
+                            <form action="/likes/{{img.id}}" method="post" enctype="multipart/form-data">
+                                {%csrf_token%}
+            
+                                {% bootstrap_form like %}
+                                <button type='submit'>
+                                    <i class="fa fa-heart" type='submit' style="font-size:30px;">{{img.likes.all|length}}</i>
+            
+                                </button>
+                            </form>
+            
+            
+                            <form id='comment' action="/comments/{{img.id}}" method="post" enctype="multipart/form-data">
+                                {%csrf_token%}
+            
+                                {% bootstrap_form comm %}
+                                <input type="submit" class="btn btn-primary btn-lg" value="Add comment">
+                            </form>
+            
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                {% endfor %}
+                {% else %}
+                Nothing has been posted so far
+                {% endif %}
+                
+            </div>
+            <div class="col-md-4"></div>
+           
     </div>
-  </div>
- </div>
+            
+</div>
+       
 
- {% endblock %}
+
+     
+   
+            {% endblock %}
+
+
+
+
+            
+        
