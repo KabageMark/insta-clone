@@ -1,40 +1,69 @@
-{%extends "registration/base.html"%}
+
+
+{% extends "registration/base.html" %}
 {% load bootstrap4 %}
+
 {% block content %}
+<style>
+  .img-fluid{
+    padding-left: 20%;
+  }
+</style>
+
 <div class="container">
-  <div class="row">
-    <!-- Empty div -->
+  <div style=" margin-top:7% "  class="row">
+
     <div class="col-md-4"></div>
+
     <div class="col-md-4">
       {% if form.errors %}
-        <p>Password or Username is incorrect</p>
+      <p> Password or Username is incorrect </p>
       {% endif %}
-      <div class="panel panel-default">
+      <div class="list-group">
 
-        <div class="panel-heading">
-          <h3 class="text-center">Sign In</h3>
+        <div class=" list-group-item panel-heading">
+          <img class="img-fluid" width="auto" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/150px-Instagram_logo.svg.png" alt="">
         </div>
-        <div class="panel-body">
+        <div class= " list-group-item panel-body">
 
-          <form  action="/accounts/login/" method="post">
+          <form action="/accounts/login/" method="post">
             {% csrf_token %}
             {% bootstrap_form form%}
 
             <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Login">
+              <input style="background-color:#3897f0" type="submit" class="btn btn-primary btn-lg btn-block" value="Login">
             </div>
+            <div class="list-group">
+              <p class="list-group-item list-group-item-action">
+                Do you have an account ? <a href="/accounts/register"> Sign Up </a>
+              </p>
+            </div>
+            <br>
 
             <input type="hidden" name="next" value="{{next}}">
 
           </form>
+          <p class="text-center"> Get the app </p>
+          <div class="row">
+            <div class="col-md-6">
+              <img width="100%" src="https://www.instagram.com/static/images/appstore-install-badges/badge_ios_english-en.png/180ae7a0bcf7.png"
+                alt="">
+            </div>
+            <div class="col-md-6">
+              <img width="100%" src="https://www.instagram.com/static/images/appstore-install-badges/badge_android_english-en.png/e9cd846dc748.png"
+                alt="">
+            </div>
+          </div>
+
 
         </div>
 
       </div>
 
     </div>
-    <!-- empty div -->
+
     <div class="col-md-4"></div>
+
   </div>
 </div>
 

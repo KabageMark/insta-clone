@@ -41,8 +41,8 @@
                                 {%csrf_token%}
             
                                 {% bootstrap_form like %}
-                                <button type='submit'>
-                                    <i class="fa fa-heart" type='submit' style="font-size:30px;">{{img.likes.all|length}}</i>
+                                <button>
+                                    <div><i class="fa fa-heart" type='submit' style="font-size:30px;">{{img.likes.all|length}}</i></div>
             
                                 </button>
                             </form>
