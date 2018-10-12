@@ -22,7 +22,7 @@ class Profile(models.Model):
         return fetched_object
 
     @classmethod
-    def save_image(self):
+    def save_profile(self):
         return self.save()
 
     @classmethod   

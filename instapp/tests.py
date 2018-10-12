@@ -3,8 +3,7 @@ from .models import Image,Profile
 # Create your tests here.
 class instagram_TestCases(TestCase):
     def setUp(self):
-        self.new_image = Image(name='Dance')
-        self.new_profile.save_profile()
+        self.new_image = Image(image_name='Dance')
         self.new_image.save_image()
         self.new_image = Image(id=1,name='learn', caption='Learn 2017',image='media/gallery/dance-3134828_1920.jpg',category=self.new_category,location=self.new_location)
     

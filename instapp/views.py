@@ -59,19 +59,6 @@ def Update(request):
 
 
 
-def search_results(request):
-
-    if 'profile' in request.GET and request.GET["profile"]:
-        search_term = request.GET.get("profile")
-        searched_profiles = Profile.search_by_username(search_term)
-        message = f"{search_term}"
-        
-        return render(request, 'searched.html',{"message":message,"searched_profiles": searched_profiles})
-
-    else:
-        message = "You haven't searched for any term"
-        return render(request, 'searched.html',{"message":message}) 
-
 
 
 
@@ -101,3 +88,18 @@ def Likes(request,id):
             liked.save()
             return redirect('index')   
     return redirect('index')
+
+
+
+
+def search_results(request):
+    
+    if 'search' in request.GET or request.GET['search']:
+        search_item = request.GET.get('search')
+        searched_users = User.objects.filter(username=search_item)
+        print(searched_users)
+        message = f"{search_item}"
+        return render(request, 'searched.html',{"message":message,"users": searched_users})
+    else:
+        message = "You haven't searched for any user"
+        return render(request, 'search.html',{"message":message})
