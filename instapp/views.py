@@ -5,6 +5,7 @@ from .forms import NewPostForm,NewProfileForm,CommentForm,LikesForm
 from .models import Image,Profile,Comment
 # Create your views here.
 
+@login_required(login_url='/accounts/login/')
 def home(request):
     title = 'Instagram'
     current_user = request.user
@@ -88,10 +89,8 @@ def Likes(request,id):
             liked.save()
             return redirect('index')   
     return redirect('index')
-
-
-
-
+    
+@login_required(login_url='/accounts/login/')
 def search_results(request):
     
     if 'search' in request.GET or request.GET['search']:
