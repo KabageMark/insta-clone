@@ -20,6 +20,7 @@ from decouple import config,Csv
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+LOGIN_REDIRECT_URL = 'index'
 
 MODE=config("MODE", default="dev")
 SECRET_KEY = config('SECRET_KEY')
